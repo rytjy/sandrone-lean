@@ -1,0 +1,35 @@
+import Mathlib
+
+/-!
+# Sandrone.Stats
+
+First batch after reopening the formalization line in CI-only mode.
+Small statements on purpose: the point is the loop (write -> push -> CI),
+not difficulty. Every proof is checked by `lake build` in CI.
+-/
+
+namespace Sandrone
+
+/-- Twice the sum of `0..n` is `n * (n + 1)`. -/
+theorem two_mul_sum_range (n : ℕ) :
+    2 * (∑ i in Finset.range (n + 1), i) = n * (n + 1) := by
+  induction n with
+  | zero => simp
+  | succ k ih =>
+      rw [Finset.sum_range_succ, Nat.mul_add, ih]
+      ring
+
+/-- A finite set has `2 ^ card` subsets. -/
+theorem card_finset {α : Type*} [Fintype α] :
+    Fintype.card (Finset α) = 2 ^ Fintype.card α := by
+  simp
+
+/-- Squares are nonnegative, so `-x^2 <= x^2`. -/
+theorem neg_sq_le_sq (x : ℤ) : -x ^ 2 ≤ x ^ 2 := by
+  nlinarith [sq_nonneg x]
+
+/-- Sum of squares of integers is nonnegative. -/
+theorem sq_add_nonneg (a b : ℤ) : 0 ≤ a ^ 2 + b ^ 2 := by
+  positivity
+
+end Sandrone
