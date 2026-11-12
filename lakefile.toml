@@ -1,0 +1,7 @@
+name = "sandrone"
+version = "0.1.0"
+defaultTargets = ["Sandrone"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
