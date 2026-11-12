@@ -52,4 +52,36 @@ theorem wilsonHalf_nonneg (n x : ℕ) (z : ℝ) (hz : 0 ≤ z) (hx : x ≤ n) (h
       ((x : ℝ) * ((n : ℝ) - (x : ℝ)) / (n : ℝ) + z ^ 2 / 4) := mul_nonneg hz hsqrt
   exact div_nonneg hmul (by positivity)
 
+
+/-- Lower endpoint of the Wilson score interval. -/
+noncomputable def wilsonLo (n x : ℕ) (z : ℝ) : ℝ :=
+  wilsonCenter n x z - wilsonHalf n x z
+
+/-- Upper endpoint of the Wilson score interval. -/
+noncomputable def wilsonHi (n x : ℕ) (z : ℝ) : ℝ :=
+  wilsonCenter n x z + wilsonHalf n x z
+
+/-- The Wilson endpoints are ordered. -/
+theorem wilsonLo_le_wilsonHi (n x : ℕ) (z : ℝ) (hz : 0 ≤ z) (hx : x ≤ n) (hn : 0 < n) :
+    wilsonLo n x z ≤ wilsonHi n x z := by
+  have h := wilsonHalf_nonneg n x z hz hx hn
+  unfold wilsonLo wilsonHi
+  linarith
+
+/-- The upper Wilson endpoint is nonnegative. -/
+theorem wilsonHi_nonneg (n x : ℕ) (z : ℝ) (hz : 0 ≤ z) (hx : x ≤ n) (hn : 0 < n) :
+    0 ≤ wilsonHi n x z := by
+  have hc := (wilsonCenter_mem_Icc n x z hx hn).1
+  have h := wilsonHalf_nonneg n x z hz hx hn
+  unfold wilsonHi
+  linarith
+
+/-- The lower Wilson endpoint is at most one. -/
+theorem wilsonLo_le_one (n x : ℕ) (z : ℝ) (hz : 0 ≤ z) (hx : x ≤ n) (hn : 0 < n) :
+    wilsonLo n x z ≤ 1 := by
+  have hc := (wilsonCenter_mem_Icc n x z hx hn).2
+  have h := wilsonHalf_nonneg n x z hz hx hn
+  unfold wilsonLo
+  linarith
+
 end Sandrone
