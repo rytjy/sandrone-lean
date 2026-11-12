@@ -1,5 +1,7 @@
 import Mathlib
 
+open scoped BigOperators
+
 /-!
 # Sandrone.Stats
 
