@@ -51,6 +51,6 @@ theorem sq_sub_sq_int (a b : ℤ) : a ^ 2 - b ^ 2 = (a - b) * (a + b) := by
 /-- A sum of squares over `range n` is nonnegative. -/
 theorem sum_range_sq_nonneg (n : ℕ) :
     0 ≤ Finset.sum (Finset.range n) (fun i => (i : ℤ) ^ 2) := by
-  exact Finset.sum_nonneg (fun i _ => sq_nonneg i)
+  exact Finset.sum_nonneg (fun i _ => sq_nonneg (i : ℤ))
 
 end Sandrone
