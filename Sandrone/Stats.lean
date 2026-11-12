@@ -14,7 +14,7 @@ namespace Sandrone
 
 /-- Twice the sum of `0..n` is `n * (n + 1)`. -/
 theorem two_mul_sum_range (n : ℕ) :
-    2 * (∑ i in Finset.range (n + 1), i) = n * (n + 1) := by
+    2 * (Finset.sum (Finset.range (n + 1)) (fun i => i)) = n * (n + 1) := by
   induction n with
   | zero => simp
   | succ k ih =>
@@ -36,7 +36,7 @@ theorem sq_add_nonneg (a b : ℤ) : 0 ≤ a ^ 2 + b ^ 2 := by
 
 /-- Twice the sum `0..n-1` is `n * (n - 1)`; stated over `ℤ` to avoid truncated subtraction. -/
 theorem two_mul_sum_range_int (n : ℕ) :
-    2 * (∑ i in Finset.range n, (i : ℤ)) = (n : ℤ) * ((n : ℤ) - 1) := by
+    2 * (Finset.sum (Finset.range n) (fun i => (i : ℤ))) = (n : ℤ) * ((n : ℤ) - 1) := by
   induction n with
   | zero => simp
   | succ k ih =>
@@ -50,7 +50,7 @@ theorem sq_sub_sq_int (a b : ℤ) : a ^ 2 - b ^ 2 = (a - b) * (a + b) := by
 
 /-- A sum of squares over `range n` is nonnegative. -/
 theorem sum_range_sq_nonneg (n : ℕ) :
-    0 ≤ ∑ i in Finset.range n, (i : ℤ) ^ 2 := by
+    0 ≤ Finset.sum (Finset.range n) (fun i => (i : ℤ) ^ 2) := by
   exact Finset.sum_nonneg (fun i _ => sq_nonneg i)
 
 end Sandrone

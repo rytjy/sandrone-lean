@@ -131,7 +131,8 @@ theorem wilsonHi_le_one (n x : ℕ) (z : ℝ) (hx : x ≤ n) (hn : 0 < n) :
         Real.sqrt ((x : ℝ) * ((n : ℝ) - (x : ℝ)) / (n : ℝ) + z ^ 2 / 4) := Real.sqrt_nonneg _
     have h1 : (0 : ℝ) ≤ z * Real.sqrt
         ((x : ℝ) * ((n : ℝ) - (x : ℝ)) / (n : ℝ) + z ^ 2 / 4) := mul_nonneg hz hsqrt
-    have h2 : (0 : ℝ) ≤ ((n : ℝ) - (x : ℝ)) + z ^ 2 / 2 := by linarith
+    have h2 : (0 : ℝ) ≤ ((n : ℝ) - (x : ℝ)) + z ^ 2 / 2 := by
+      nlinarith [sq_nonneg z]
     have hsq : z ^ 2 * ((x : ℝ) * ((n : ℝ) - (x : ℝ)) / (n : ℝ) + z ^ 2 / 4)
         ≤ (((n : ℝ) - (x : ℝ)) + z ^ 2 / 2) ^ 2 := by
       have hkey : (0 : ℝ) ≤ ((n : ℝ) - (x : ℝ)) ^ 2 * ((n : ℝ) + z ^ 2) :=
