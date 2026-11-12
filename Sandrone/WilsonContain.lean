@@ -53,4 +53,11 @@ theorem wilson_contains (n x : ℕ) (z : ℝ) (hz : 0 ≤ z) (hx : x ≤ n) (hn 
   · unfold wilsonHi
     linarith [hb.2]
 
+
+/-- With `z = 1.96` the formal centre for 9 of 13 is the rational `13651/21052`
+(≈ 0.648442), matching the published interval `[0.42, 0.87]`. -/
+theorem wilsonCenter_thirteen_nine :
+    wilsonCenter 13 9 (49 / 25 : ℝ) = 13651 / 21052 := by
+  norm_num [wilsonCenter]
+
 end Sandrone
