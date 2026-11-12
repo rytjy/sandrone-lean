@@ -8,4 +8,5 @@ scope = "leanprover-community"
 
 [[lean_lib]]
 name = "Sandrone"
+globs = ["Sandrone", "Sandrone.*"]
 moreLeanArgs = ["-DautoImplicit=false", "-DwarningAsError=true"]
