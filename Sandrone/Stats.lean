@@ -32,4 +32,23 @@ theorem neg_sq_le_sq (x : ℤ) : -x ^ 2 ≤ x ^ 2 := by
 theorem sq_add_nonneg (a b : ℤ) : 0 ≤ a ^ 2 + b ^ 2 := by
   positivity
 
+/-- Twice the sum `0..n-1` is `n * (n - 1)`; stated over `ℤ` to avoid truncated subtraction. -/
+theorem two_mul_sum_range_int (n : ℕ) :
+    2 * (∑ i in Finset.range n, (i : ℤ)) = (n : ℤ) * ((n : ℤ) - 1) := by
+  induction n with
+  | zero => simp
+  | succ k ih =>
+      rw [Finset.sum_range_succ, mul_add, ih]
+      push_cast
+      ring
+
+/-- Difference of squares factors over the integers. -/
+theorem sq_sub_sq_int (a b : ℤ) : a ^ 2 - b ^ 2 = (a - b) * (a + b) := by
+  ring
+
+/-- A sum of squares over `range n` is nonnegative. -/
+theorem sum_range_sq_nonneg (n : ℕ) :
+    0 ≤ ∑ i in Finset.range n, (i : ℤ) ^ 2 := by
+  exact Finset.sum_nonneg (fun i _ => sq_nonneg i)
+
 end Sandrone
